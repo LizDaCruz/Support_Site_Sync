@@ -1,0 +1,41 @@
+package main
+
+import (
+    "context"
+    "log"
+    "confluence" // Replace with the actual package path
+)
+
+func syncPages(ctx context.Context, services []Service, page Page) {
+    var wg sync.WaitGroup
+    for _, svc := range services {
+        wg.Add(1)
+        go func(s Service) {
+            defer wg.Done()
+            err := s.UpdatePage(ctx, page)
+            if err != nil {
+                log.Printf("Error updating page: %v", err)
+            }
+        }(svc)
+    }
+    wg.Wait()
+}
+
+func main() {
+    // Initialize Confluence service
+    confluenceSvc := confluence.NewConfluenceService("https://your-confluence-url", "username", "api-token")
+    sharepointSvc := sharepoint.NewSharePointService("https://your-sharepoint-site-url", "your-access-token")
+
+
+    services := []Service{confluenceSvc, sharepointSvc}
+
+    // Create a page and sync
+    page := Page{
+        ID:      "example-page-id",
+        Title:   "Example Page",
+        Content: "This is an example page content.",
+    }
+
+    ctx := context.Background()
+    syncPages(ctx, services, page)
+}

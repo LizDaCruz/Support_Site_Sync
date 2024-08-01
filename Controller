@@ -3,7 +3,10 @@ package main
 import (
     "context"
     "log"
-    "confluence" // Replace with the actual package path
+    //add in actual package paths for the 10 sites
+    "confluence"
+    "sharepoint"
+    
 )
 
 func syncPages(ctx context.Context, services []Service, page Page) {

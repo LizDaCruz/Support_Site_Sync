@@ -21,3 +21,6 @@ go get github.com/go-resty/resty/v2
 
 go get github.com/go-yaml/yaml
 
+# Testing
+
+Update and Run Service_Test.go to fit testing needs

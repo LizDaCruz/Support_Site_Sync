@@ -6,3 +6,13 @@ The application aims to streamline the management of support content by allowing
 
 # Supported Sites
 Confluence, Sharepoint, Zendesk, Freshdesk, ServiceNow, Helpjuice, Notion, Docsify, Guru, Trello
+
+# Environment Setup
+
+## Create Project
+go mod init Support_Site_Sync
+
+## Define Dependencies
+go get github.com/go-resty/resty/v2
+go get github.com/go-yaml/yaml
+
